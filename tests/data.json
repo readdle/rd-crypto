@@ -1,0 +1,10 @@
+{
+    "secret": "NGYR4rBcywrVLqON",
+    "invalidSecret1": "NGYR4rBcywrVLqON123123",
+    "invalidSecret2": "NGYR4rBcywrVL",
+    "decrypted": "qwerty",
+    "encrypted": "-CRYPT-bbbeb0f569636a1e94b7ac8cadd07e83",
+    "wrongSecret": "--secret-16-char",
+    "wrongEncrypted": "-BLABLA-CRYPT-bbbeb0f569636a1e94b7ac8cadd07e83"
+
+}

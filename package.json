@@ -1,0 +1,27 @@
+{
+    "name": "rdcrypto",
+    "version": "0.0.1",
+    "description": "rdcrypto - unified library for encrypt/decrypt values",
+    "main": "lib/rdcrypto.js",
+    "bin": {
+        "encrypt": "lib/bin/encrypt.js",
+        "decrypt": "lib/bin/decrypt.js"
+    },
+    "dependencies": {
+    },
+    "devDependencies": {
+        "nodeunit": "^0.9.1"
+    },
+    "scripts": {
+        "test": "nodeunit tests/node/test-rdcrypto.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/readdle/rd-crypto.git"
+    },
+    "author": "Vladimir Melnik (Readdle)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/readdle/rd-crypto/issues"
+    }
+}
