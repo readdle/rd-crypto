@@ -1,6 +1,6 @@
 {
     "name": "rdcrypto",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "rdcrypto - unified library for encrypt/decrypt values",
     "main": "lib/rdcrypto.js",
     "bin": {
