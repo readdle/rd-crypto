@@ -13,11 +13,11 @@ class Crypto implements CryptoInterface
      */
     public static function decrypt($value, $secret)
     {
-        self::checkSecretLength($secret);
-
         if (strpos($value, self::CRYPTO_MARKER) !== 0) {
             return $value;
         }
+
+        self::checkSecretLength($secret);
 
         $value = substr($value, strlen(self::CRYPTO_MARKER));
         $iv = md5($secret, true);

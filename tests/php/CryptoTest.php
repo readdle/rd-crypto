@@ -15,12 +15,10 @@ class CryptoTest extends PHPUnit_Framework_TestCase
         \Readdle\Crypt\Crypto::encrypt($this->testData['decrypted'], $this->testData['invalidSecret1']);
     }
 
-    /**
-     * @expectedException \Readdle\Crypt\InvalidArgumentException
-     */
     public function testInvalidSecretLength1WithDecrypt()
     {
-        \Readdle\Crypt\Crypto::decrypt($this->testData['decrypted'], $this->testData['invalidSecret1']);
+        $res = \Readdle\Crypt\Crypto::decrypt($this->testData['decrypted'], $this->testData['invalidSecret1']);
+        $this->assertEquals($this->testData['decrypted'], $res);
     }
 
     /**
@@ -31,12 +29,10 @@ class CryptoTest extends PHPUnit_Framework_TestCase
         \Readdle\Crypt\Crypto::encrypt($this->testData['decrypted'], $this->testData['invalidSecret2']);
     }
 
-    /**
-     * @expectedException \Readdle\Crypt\InvalidArgumentException
-     */
     public function testInvalidSecretLength2WithDecrypt()
     {
-        \Readdle\Crypt\Crypto::decrypt($this->testData['decrypted'], $this->testData['invalidSecret2']);
+        $res = \Readdle\Crypt\Crypto::decrypt($this->testData['decrypted'], $this->testData['invalidSecret2']);
+        $this->assertEquals($this->testData['decrypted'], $res);
     }
 
     public function testEncrypt()
