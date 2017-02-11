@@ -1,6 +1,6 @@
 {
     "name": "rdcrypto",
-    "version": "0.0.2",
+    "version": "0.1",
     "description": "rdcrypto - unified library for encrypt/decrypt values",
     "main": "lib/rdcrypto.js",
     "bin": {
@@ -9,7 +9,7 @@
     },
     "dependencies": {
     },
-    "engines": { "node": "<6.0.0" },
+    "engines": { "node": ">=6.0.0" },
     "engineStrict": true,
     "devDependencies": {
         "nodeunit": "^0.9.1"
