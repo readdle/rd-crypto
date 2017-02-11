@@ -9,6 +9,8 @@
     },
     "dependencies": {
     },
+    "engines": { "node": "<6.0.0" },
+    "engineStrict": true,
     "devDependencies": {
         "nodeunit": "^0.9.1"
     },
