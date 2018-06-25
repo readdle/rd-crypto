@@ -46,7 +46,7 @@ class CryptoTest extends TestCase
      */
     public function testInvalidSecretLength2WithDecrypt()
     {
-        \Readdle\Crypt\Crypto::decrypt($this->testData["decrypted"], $this->testData["invalidSecret2"]);
+        \Readdle\Crypt\Crypto::decrypt($this->testData["encrypted"], $this->testData["invalidSecret2"]);
     }
 
     public function testEncrypt()
