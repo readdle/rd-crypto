@@ -2,7 +2,8 @@
     "name": "readdle/crypto",
     "version": "0.0.3",
     "require": {
-        "php": ">=7.1"
+        "php": ">=7.1",
+        "ext-openssl": "*"
     },
 
     "require-dev": {
