@@ -1,14 +1,13 @@
 {
     "name": "rdcrypto",
-    "version": "0.1",
+    "version": "0.1.1",
     "description": "rdcrypto - unified library for encrypt/decrypt values",
     "main": "lib/rdcrypto.js",
     "bin": {
         "encrypt": "lib/bin/encrypt.js",
         "decrypt": "lib/bin/decrypt.js"
     },
-    "dependencies": {
-    },
+    "dependencies": {},
     "devDependencies": {
         "nodeunit": "^0.9.1"
     },
