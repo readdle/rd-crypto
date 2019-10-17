@@ -1,55 +1,44 @@
 <?php
+
+declare(strict_types = 1);
+
 namespace Readdle\Crypt;
 
-class Crypto implements CryptoInterface
+final class Crypto implements CryptoInterface
 {
-    const CRYPTO_MARKER = '-CRYPT-';
-    const BLOCK_SIZE = 16;
-
-    /**
-     * @param $value
-     * @param $secret
-     * @return string
-     */
-    public static function decrypt($value, $secret)
+    private const CRYPTO_MARKER = "-CRYPT-";
+    private const CRYPT_METHOD  = "AES-128-CBC";
+    private const BLOCK_SIZE    = 16;
+    private $secret;
+    
+    public function __construct(Secret $secret)
     {
-        if (strpos($value, self::CRYPTO_MARKER) !== 0) {
+        $this->secret = $secret;
+    }
+    
+    public function encrypt(string $value): string
+    {
+        $iv = openssl_random_pseudo_bytes(self::BLOCK_SIZE);
+        $encrypted = bin2hex(openssl_encrypt($value, self::CRYPT_METHOD, (string)$this->secret, OPENSSL_RAW_DATA, $iv));
+        
+        return self::CRYPTO_MARKER . bin2hex($iv) . $encrypted;
+    }
+    
+    public function decrypt(string $value): string
+    {
+        if (0 !== strpos($value, self::CRYPTO_MARKER)) {
             return $value;
         }
         
-        self::checkSecretLength($secret);
-        
-        $value = substr($value, strlen(self::CRYPTO_MARKER));
-        
-        $iv = md5($secret, true);
-        
-        return openssl_decrypt(hex2bin($value), "AES-128-CBC", $secret, OPENSSL_RAW_DATA, $iv);
-    }
-
-
-    /**
-     * @param $value
-     * @param $secret
-     * @return string
-     */
-    public static function encrypt($value, $secret)
-    {
-        self::checkSecretLength($secret);
-
-        $iv = md5($secret, true);
-
-        return self::CRYPTO_MARKER . bin2hex(
-            openssl_encrypt($value, "AES-128-CBC", $secret,OPENSSL_RAW_DATA, $iv)
-        );
-    }
-
-    /**
-     * @param $secret
-     */
-    private static function checkSecretLength($secret)
-    {
-        if (strlen($secret) !== 16) {
-            throw new InvalidArgumentException("Secret length should be exactly 16 characters long");
+        $original = $value;
+        try {
+            $value = substr($value, strlen(self::CRYPTO_MARKER));
+            $iv = hex2bin(substr($value, 0, self::BLOCK_SIZE * 2));
+            $decrypted = hex2bin(substr($value, self::BLOCK_SIZE * 2));
+            
+            return openssl_decrypt($decrypted, self::CRYPT_METHOD, (string)$this->secret, OPENSSL_RAW_DATA, $iv);
+        } catch (\Throwable $e) {
+            return $original;
         }
     }
 }
