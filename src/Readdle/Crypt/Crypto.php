@@ -6,8 +6,8 @@ namespace Readdle\Crypt;
 
 final class Crypto implements CryptoInterface
 {
-    private const CRYPTO_MARKER = "-CRYPT-";
-    private const CRYPT_METHOD  = "AES-128-CBC";
+    private const CRYPTO_MARKER = "-CRYPT-V2-";
+    private const CRYPT_METHOD  = "aes-256-gcm";
     private const BLOCK_SIZE    = 16;
     private $secret;
     
@@ -18,10 +18,11 @@ final class Crypto implements CryptoInterface
     
     public function encrypt(string $value): string
     {
+        $tag       = "";
         $iv        = \openssl_random_pseudo_bytes(self::BLOCK_SIZE);
-        $encrypted = \bin2hex(\openssl_encrypt($value, self::CRYPT_METHOD, (string)$this->secret, OPENSSL_RAW_DATA, $iv));
+        $encrypted = \openssl_encrypt($value, self::CRYPT_METHOD, (string)$this->secret, OPENSSL_RAW_DATA, $iv, $tag);
         
-        return self::CRYPTO_MARKER . \bin2hex($iv) . $encrypted;
+        return self::CRYPTO_MARKER . \bin2hex($iv) . \bin2hex($encrypted) . \bin2hex($tag);
     }
     
     public function decrypt(string $value): string
@@ -30,13 +31,25 @@ final class Crypto implements CryptoInterface
             return $value;
         }
         
+        if (\strlen($value) < self::BLOCK_SIZE * 4) {
+            return $value;
+        }
+        
         $original = $value;
         try {
             $value     = \substr($value, \strlen(self::CRYPTO_MARKER));
-            $iv        = \hex2bin(\substr($value, 0, self::BLOCK_SIZE * 2));
-            $decrypted = \hex2bin(\substr($value, self::BLOCK_SIZE * 2));
+            $iv        = \substr($value, 0, self::BLOCK_SIZE * 2);
+            $decrypted = \substr($value, self::BLOCK_SIZE * 2, -(self::BLOCK_SIZE * 2));
+            $tag       = \substr($value, -(self::BLOCK_SIZE * 2));
             
-            return \openssl_decrypt($decrypted, self::CRYPT_METHOD, (string)$this->secret, OPENSSL_RAW_DATA, $iv);
+            return \openssl_decrypt(
+                \hex2bin($decrypted),
+                self::CRYPT_METHOD,
+                (string)$this->secret,
+                OPENSSL_RAW_DATA,
+                \hex2bin($iv),
+                \hex2bin($tag)
+            );
         } catch (\Throwable $e) {
             return $original;
         }
