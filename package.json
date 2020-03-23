@@ -16,7 +16,7 @@
         "jest": "^24.9.0"
     },
     "scripts": {
-        "test": "pwd && ls -la && jest"
+        "test": "jest"
     },
     "repository": {
         "type": "git",
