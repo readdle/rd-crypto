@@ -12,9 +12,9 @@ final class Secret
     
     private function __construct(string $value)
     {
-        if (self::LENGTH !== strlen($value)) {
+        if (self::LENGTH !== \strlen($value)) {
             throw new InvalidArgumentException(
-                sprintf(
+                \sprintf(
                     "Secret length should be exactly %s characters long",
                     self::LENGTH
                 )

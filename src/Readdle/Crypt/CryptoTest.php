@@ -36,7 +36,7 @@ class CryptoTest extends TestCase
     
     protected function setUp(): void
     {
-        $this->secret = "NGYR4rBcywrVLqON";
+        $this->secret   = "NGYR4rBcywrVLqON";
         $this->rdcrypto = new Crypto(Secret::fromString($this->secret));
     }
 }

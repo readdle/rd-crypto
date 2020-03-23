@@ -16,7 +16,7 @@ class SecretTest extends TestCase
     
     public function testValidSecret()
     {
-        $value = str_pad("", Secret::LENGTH, "a");
+        $value = \str_pad("", Secret::LENGTH, "a");
         self::assertSame($value, (string)Secret::fromString($value));
     }
 }

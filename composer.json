@@ -48,10 +48,10 @@
             "phpunit"
         ],
         "lint-autofix": [
-            "phpcbf -s -n --standard=$(pwd)/phpcs.ruleset.xml --runtime-set testVersion 7.2- --extensions=php --encoding=utf-8 $(pwd)/src/ 2>/dev/null || true"
+            "phpcbf -s -n --standard=$(pwd)/phpcs.ruleset.xml $(pwd)/src/ 2>/dev/null || true"
         ],
         "lint": [
-            "phpcs -s -n --standard=$(pwd)/phpcs.ruleset.xml --runtime-set testVersion 7.2- --extensions=php --encoding=utf-8 $(pwd)/src/"
+            "phpcs -s -n --standard=$(pwd)/phpcs.ruleset.xml $(pwd)/src/"
         ],
         "ci": [
             "@lint",
