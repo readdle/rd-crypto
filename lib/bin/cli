@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 
 const argv = process.argv.slice(2);
-[command, secret, value] = argv;
+[command, secret, salt, value] = argv;
 
 function usage() {
     return `
     Usage
-      $ rdcrypto <command=encrypt|decrypt> <secret> <value>
+      $ rdcrypto <command=encrypt|decrypt> <secret> <salt> <value>
  
     Examples:
-      $ rdcrypto encrypt bcbbe206d7354b17 value
-      $ rdcrypto decrypt bcbbe206d7354b17 -CRYPT-7e944dbac073710f3425db8095962500dcdd41c503ba6c7f7d3279603d8b734a
+      $ rdcrypto encrypt bcbbe206d7354b17 62b8727be2ee9d8650cd315a3c98d360ec7f09bb value
+      $ rdcrypto decrypt bcbbe206d7354b17 62b8727be2ee9d8650cd315a3c98d360ec7f09bb -CRYPT-V2-8f50b64b4dca10b8062287658680e876e7a75fbda9226bcf72d74bd5f6b7f512525827b7c6
 `;
 }
 
@@ -25,7 +25,7 @@ function resolveCommand(command) {
 }
 
 try {
-    const rdcrypto = require("./../rdcrypto")(`${secret}`);
+    const rdcrypto = require("./../rdcrypto")(`${secret}`, `${salt}`);
     const result = rdcrypto[resolveCommand(command)](value || "");
     console.log(result);
 } catch (err) {
