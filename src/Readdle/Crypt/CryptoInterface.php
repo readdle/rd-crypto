@@ -1,9 +1,10 @@
 <?php
+
 namespace Readdle\Crypt;
 
 interface CryptoInterface
 {
-    public static function encrypt($encrypt, $secret);
+    public function encrypt(string $value): string;
 
-    public static function decrypt($encrypt, $secret);
+    public function decrypt(string $value): string;
 }
