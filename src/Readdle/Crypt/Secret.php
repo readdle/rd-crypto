@@ -6,9 +6,9 @@ namespace Readdle\Crypt;
 
 final class Secret
 {
-    const MIN_LENGTH = 16;
+    public const MIN_LENGTH = 16;
     
-    private $value;
+    private string $value;
     
     private function __construct(string $value)
     {
