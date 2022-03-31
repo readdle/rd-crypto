@@ -1,7 +1,7 @@
 {
     "name": "readdle/crypto",
     "license": "MIT",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "type": "library",
     "description": "rdcrypto - unified library for encrypt/decrypt values",
     "authors": [
@@ -11,22 +11,22 @@
         }
     ],
     "config": {
-        "platform": {
-            "php": "7.2"
-        },
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     },
     "require": {
-        "php": ">=7.2",
+        "php": ">=8.0.2",
         "ext-openssl": "*"
     },
     "require-dev": {
-        "escapestudios/symfony2-coding-standard": "^3.9",
+        "escapestudios/symfony2-coding-standard": "^3.12",
         "pheromone/phpcs-security-audit": "^2.0",
         "phpcompatibility/php-compatibility": "^9.3",
-        "phpunit/phpunit": "^8.4",
-        "slevomat/coding-standard": "^5.0",
-        "squizlabs/php_codesniffer": "^3.5"
+        "phpunit/phpunit": "^9.5",
+        "slevomat/coding-standard": "^7.1",
+        "squizlabs/php_codesniffer": "^3.6"
     },
     "autoload": {
         "exclude-from-classmap": ["*Test.php"],

@@ -1,19 +1,19 @@
 {
     "name": "rdcrypto",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "rdcrypto - unified library for encrypt/decrypt values",
     "main": "rdcrypto.js",
     "author": "Vladimir Melnik (Readdle)",
     "license": "MIT",
     "engines": {
-        "node": ">=10.16.3"
+        "node": ">=12"
     },
     "bin": {
         "rdcrypto": "bin/cli"
     },
     "dependencies": {},
     "devDependencies": {
-        "jest": "^24.9.0"
+        "jest": "^27.5.1"
     },
     "scripts": {
         "test": "jest"
