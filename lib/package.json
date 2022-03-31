@@ -1,6 +1,6 @@
 {
     "name": "rdcrypto",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "rdcrypto - unified library for encrypt/decrypt values",
     "main": "rdcrypto.js",
     "author": "Vladimir Melnik (Readdle)",
